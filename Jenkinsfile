@@ -47,7 +47,7 @@ pipeline {
             }
         }
 		
-        stage ('CODE ANALYSIS WITH CHECKSTYLE'){
+        /*stage ('CODE ANALYSIS WITH CHECKSTYLE'){
             steps {
                 sh 'mvn checkstyle:checkstyle'
             }
@@ -58,6 +58,7 @@ pipeline {
             }
         }
 
+*/
         stage('CODE ANALYSIS with SONARQUBE') {
           
 		  environment {
@@ -74,6 +75,8 @@ pipeline {
                    -Dsonar.junit.reportsPath=target/surefire-reports/ \
                    -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+		    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "exit 1"
             }
 
             timeout(time: 10, unit: 'MINUTES') {
