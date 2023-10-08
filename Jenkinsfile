@@ -11,7 +11,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
 	    
-        NEXUS_URL = "ec2-52-201-48-49.compute-1.amazonaws.com:8081"
+        NEXUS_URL = "ec2-52-207-85-171.compute-1.amazonaws.com:8081"
 	/*
 	    "172.31.40.209:8081" 
 	*/
