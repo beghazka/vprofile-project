@@ -11,7 +11,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
 	    
-        NEXUS_URL = "ec2-52-207-85-171.compute-1.amazonaws.com:8081"
+        NEXUS_URL = "192.168.43.10:8081"
 	/*
 	    "172.31.40.209:8081" 
 	*/
@@ -80,7 +80,7 @@ pipeline {
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
 		/*catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh "exit 1"}
-            */
+            
 	    }
 	    
 
@@ -89,6 +89,7 @@ pipeline {
             }
           }
         }
+	*/
 
         stage("Publish to Nexus Repository Manager") {
             steps {
