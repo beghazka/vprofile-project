@@ -1,12 +1,14 @@
 pipeline {
     
-	agent any
-/*	
+	agent{
+		label 'node1'
+	}
+	
 	tools {
-        maven "maven3"
+        maven "MAVEN3"
     }
-*/	
-    environment {
+	
+   /* environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "172.31.40.209:8081"
@@ -15,18 +17,13 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "nexuslogin"
         ARTVERSION = "${env.BUILD_ID}"
     }
+    */
 	
     stages{
         
         stage('BUILD'){
             steps {
                 sh 'mvn clean install -DskipTests'
-            }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
             }
         }
 
@@ -42,16 +39,7 @@ pipeline {
             }
         }
 		
-        stage ('CODE ANALYSIS WITH CHECKSTYLE'){
-            steps {
-                sh 'mvn checkstyle:checkstyle'
-            }
-            post {
-                success {
-                    echo 'Generated Analysis Result'
-                }
-            }
-        }
+     /*   
 
         stage('CODE ANALYSIS with SONARQUBE') {
           
@@ -76,8 +64,9 @@ pipeline {
             }
           }
         }
-
-        stage("Publish to Nexus Repository Manager") {
+*/
+        /*
+	    stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
                     pom = readMavenPom file: "pom.xml";
@@ -113,6 +102,7 @@ pipeline {
                 }
             }
         }
+	*/
 
 
     }
